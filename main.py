@@ -37,28 +37,37 @@ def main():
     screen_width, screen_height = get_screen_size(device_id)
     
     # Determine which secretary positions to use
-    alternate_position = options.get('alternatePosition', False)
-    secretary_key = 'secretaryPositionsAlt' if alternate_position else 'secretaryPositions'
-    secretary_positions = positions.get(secretary_key, {})
+    secretary_positions = positions.get('secretaryPositions', {})
+    alternate_positions = positions.get('secretaryPositionsAlt', {})
     button_positions = positions.get('buttonPositions', {})
 
     # Convert positions from percentages to pixels
     secretary_positions = convert_percentage_positions(secretary_positions, screen_width, screen_height)
+    alternate_positions = convert_percentage_positions(alternate_positions, screen_width, screen_height)
     button_positions = convert_percentage_positions(button_positions, screen_width, screen_height)
 
     last_status_check = None
+    last_reset = None
+    is_alternate = None
 
     while True:
         try:
             # Check game and secretary screen status every 10 minutes
             needs_status_check, last_status_check = check_time_passed(last_status_check, options['statusCheckTimer'])
+            needs_reset, last_reset = check_time_passed(last_status_check, options['resetTimer'])
+            if needs_reset or is_alternate is None:
+                logger.info("Forcing reset.")
+                is_alternate = launch_secretary_screen(device_id, options, templates, button_positions)
+
             if needs_status_check:
                 is_secretary_screen = check_game_status(device_id, options, templates)
                 if not is_secretary_screen:
                     logger.info("Launching secretary screen.")
-                    launch_secretary_screen(device_id, options, templates, button_positions)
+                    is_alternate = launch_secretary_screen(device_id, options, templates, button_positions)
 
             # Handle each position in the secretary positions list
+            positions = alternate_positions if is_alternate else secretary_positions
+
             for name, secretary_position in secretary_positions.items():
                 accepted = handle_applicants(
                     device_id,

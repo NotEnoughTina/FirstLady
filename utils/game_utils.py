@@ -127,10 +127,17 @@ def launch_secretary_screen(device_id, options, templates, button_positions):
         device_id
     )
 
-    # Sroll to bottom
-    swipe_up(device_id)
+    #check if aternate positon
+    random_sleep(sleep_timer)
+    screen_shot = capture_screenshot(device_id)
+    conquerer_position = find_on_screen(screen_shot, templates['conquerer'])
+    if conquerer_position:
+        # Sroll to bottom
+        swipe_up(device_id, 3)
 
     random_sleep(sleep_timer)
+
+    return conquerer_position is not None
 
 
 def open_position_menu(device_id, secretary_position, button_positions, options):
@@ -211,7 +218,7 @@ def handle_applicants(device_id, secretary_position, button_positions, options, 
         return 0
 
     # Swipe to the top of the list
-    swipe_down(device_id, 5)
+    swipe_down(device_id, 10)
 
     # Process accept icons
     applicants_accepted = accept_applicants(device_id, templates, options)

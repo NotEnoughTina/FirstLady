@@ -1,9 +1,13 @@
 {
     "blacklist": {
-        "names": ["TEST"]
+        "names": [
+            "TEST"
+        ]
     },
     "allianceBlacklist": {
-        "tags": ["TEST"]
+        "tags": [
+            "TEST"
+        ]
     },
     "templates": {
         "capitol": "images/icons/Capitol.png",
@@ -11,38 +15,90 @@
         "accept": "images/icons/AcceptIcon.png",
         "firstLady": "images/templates/FirstLady.png",
         "awesome": "images/templates/Awesome.png",
+        "conquerer": "images/templates/conquerer.png",
         "quit": "images/templates/QuitGame.png"
     },
     "positions": {
         "secretaryPositions": {
-            "strategy": ["45%", "50%"],
-            "security": ["75%", "50%"],
-            "development": ["15%", "75%"],
-            "science": ["45%", "75%"],
-            "interior": ["75%", "75%"]
+            "strategy": [
+                "45%",
+                "50%"
+            ],
+            "security": [
+                "75%",
+                "50%"
+            ],
+            "development": [
+                "15%",
+                "75%"
+            ],
+            "science": [
+                "45%",
+                "75%"
+            ],
+            "interior": [
+                "75%",
+                "75%"
+            ]
+        },
+        "extra": {
+            "military": [
+                "32%",
+                "40%"
+            ],
+            "adminstrative": [
+                "64%",
+                "40%"
+            ]
         },
         "secretaryPositionsAlt": {
-            "military": ["32%", "40%"],
-            "adminstrative": ["64%", "40%"],
-            "strategy": ["45%", "60%"],
-            "security": ["75%", "60%"],
-            "development": ["15%", "85%"],
-            "science": ["45%", "85%"],
-            "interior": ["75%", "85%"]
+            "strategy": [
+                "45%",
+                "60%"
+            ],
+            "security": [
+                "75%",
+                "60%"
+            ],
+            "development": [
+                "15%",
+                "85%"
+            ],
+            "science": [
+                "45%",
+                "85%"
+            ],
+            "interior": [
+                "75%",
+                "85%"
+            ]
         },
         "buttonPositions": {
-            "list": ["85%", "85%"],
-            "close": ["88.5%", "12.5%"],
-            "profile": ["7.5%", "5%"],
-            "secrataryMenu": ["70%", "65%"]
+            "list": [
+                "85%",
+                "85%"
+            ],
+            "close": [
+                "88.5%",
+                "12.5%"
+            ],
+            "profile": [
+                "7.5%",
+                "5%"
+            ],
+            "secrataryMenu": [
+                "70%",
+                "65%"
+            ]
         }
     },
     "options": {
         "sleep": 3,
         "statusCheckTimer": 1,
-        "bootTimer": 60,
+        "resetTimer": 30,
+        "bootTimer": 80,
         "imageMatchThreshold": 0.65,
-        "alternatePosition": false,
+        "alternatePosition": true,
         "packageName": "com.fun.lastwar.gp"
     }
 }
