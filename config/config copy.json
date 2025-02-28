@@ -1,0 +1,259 @@
+{
+  "package_name": "com.fun.lastwar.gp",
+  "sleep_multiplier": 1.0,
+  "debug_mode": false,
+  "max_retries": 3,
+  "max_home_attempts": 500,
+  "retry_delay": 1.0,
+  "collect_resources_interval": 300,
+  "donate_alliance_interval": null,
+  "screenshot_quality": 100,
+  "match_threshold": 0.8,
+  "ui_elements": {
+    "profile": {
+      "x": "5%",
+      "y": "3%"
+    },
+    "swipe": {
+      "start_x": "50%",
+      "start_y": "30%",
+      "end_x": "50%",
+      "end_y": "80%"
+    },
+    "alliance_toggle": {
+      "x": "93%",
+      "y": "93%"
+    }
+  },
+  "timings": {
+    "tap_delay": 1,
+    "menu_animation": 1,
+    "list_animation": 1,
+    "swipe_duration": {
+
+      "min": 300,
+      "max": 400
+    },
+    "list_timeout": 2.0,
+    "accept_timeout": 1.0,
+    "scroll_delay": 0.3,
+    "settle_time": 0.2,
+    "home_check_interval": 3.0,
+    "launch_wait": 20.0,
+    "launch_max_wait": 120.0,
+    "quit_check_timeout": 2.0,
+    "error_delay": 5.0,
+    "app_close_wait": 5
+  },
+  "randomization": {
+    "critical_radius": 1,
+    "normal_radius": 2,
+    "swipe_variance": {
+      "position": "1%",
+      "duration": 10
+    }
+  },
+  "ocr_settings": {
+    "languages": {
+      "alliance": "eng+osd",
+      "name": [
+        "eng",
+        "chi_sim",
+        "kor",
+        "jpn",
+        "rus",
+        "ara",
+        "tha"
+      ]
+    },
+    "psm_mode": 8,
+    "oem_mode": 3
+  },
+  "control_list": {
+    "whitelist": {
+      "alliance": [
+        "Brn",
+        "sTAR",
+        "twr",
+        "UbRg",
+        "Trol",
+        "trol",
+        "wxp",
+        "NzC",
+        "krw",
+        "FZL",
+        "rhw",
+        "s8UP",
+        "ssUP"
+      ]
+    },
+    "blacklist": {
+      "alliance": []
+    }
+  },
+  "templates": {
+    "left_bracket": {
+      "path": "templates/ui/left_bracket.png",
+      "threshold": 0.75
+    },
+    "right_bracket": {
+      "path": "templates/ui/right_bracket.png",
+      "threshold": 0.75
+    },
+    "accept": {
+      "path": "templates/secretary/accept.png",
+      "threshold": 0.6
+    },
+    "reject": {
+      "path": "templates/ui/reject.png",
+      "threshold": 0.6
+    },
+    "confirm": {
+      "path": "templates/secretary/confirm.png",
+      "threshold": 0.6
+    },
+    "help": {
+      "path": "templates/ui/help.png",
+      "threshold": 0.8
+    },
+    "home": {
+      "path": "templates/ui/home.png",
+      "threshold": 0.8
+    },
+    "start": {
+      "path": "templates/ui/start.png",
+      "threshold": 0.75
+    },
+    "alliance": {
+      "path": "templates/alliance/alliance.png",
+      "threshold": 0.55
+    },
+    "alliance_tech_icon": {
+      "path": "templates/alliance/alliance_tech_icon.png",
+      "threshold": 0.55
+    },
+    "recommended_flag": {
+      "path": "templates/alliance/recommended_flag.png",
+      "threshold": 0.55
+    },
+    "donate_button": {
+      "path": "templates/alliance/donate_button.png",
+      "threshold": 0.55
+    },
+    "president": {
+      "path": "templates/secretary/president.png",
+      "threshold": 0.4
+    },
+    "capitol_menu": {
+      "path": "templates/secretary/capitol_menu.png",
+      "threshold": 0.4
+    },
+    "list": {
+      "path": "templates/ui/list.png",
+      "threshold": 0.6
+    },
+    "strategy": {
+      "path": "templates/secretary/strategy.png",
+      "threshold": 0.8
+    },
+    "security": {
+      "path": "templates/secretary/security.png",
+      "threshold": 0.8
+    },
+    "development": {
+      "path": "templates/secretary/development.png",
+      "threshold": 0.8
+    },
+    "science": {
+      "path": "templates/secretary/science.png",
+      "threshold": 0.8
+    },
+    "interior": {
+      "path": "templates/secretary/interior.png",
+      "threshold": 0.8
+    },
+    "military": {
+      "path": "templates/secretary/military.png",
+      "threshold": 0.8
+    },
+    "administrative": {
+      "path": "templates/secretary/administrative.png",
+      "threshold": 0.8
+    },
+    "quit": {
+      "path": "templates/ui/quit.png",
+      "threshold": 0.65
+    },
+    "awesome": {
+      "path": "templates/ui/awesome.png",
+      "threshold": 0.75
+    },
+    "secret_task": {
+      "path": "templates/ui/secret_task.png",
+      "threshold": 0.75
+    },
+    "dig": {
+      "path": "templates/ui/dig.png",
+      "threshold": 0.75
+    },
+    "hidden_treasures": {
+      "path": "templates/hidden_treasures/hidden_treasures_tab.png",
+      "threshold": 0.75
+    },
+    "hidden_treasures_exchange": {
+      "path": "templates/hidden_treasures/hidden_treasures_exchange.png",
+      "threshold": 0.75
+    },
+    "hidden_treasures_start_exchange": {
+      "path": "templates/hidden_treasures/hidden_treasures_start_exchange.png",
+      "threshold": 0.75
+    },
+    "hidden_treasures_allies_exchange": {
+      "path": "templates/hidden_treasures/hidden_treasures_allies_exchange.png",
+      "threshold": 0.75
+    },
+    "hidden_treasures_confirm_exchange": {
+      "path": "templates/hidden_treasures/hidden_treasures_confirm_exchange.png",
+      "threshold": 0.75
+    },
+    "has_applicant": {
+      "path": "templates/secretary/hasApplicant.png",
+      "threshold": 0.50
+    },
+    "alliance_gifts": {
+      "path": "templates/alliance/gifts.png",
+      "threshold": 0.65
+    },
+    "alliance_claim_all": {
+      "path": "templates/alliance/claim_all.png",
+      "threshold": 0.65
+    },
+    "alliance_gift_premium": {
+      "path": "templates/alliance/premium.png",
+      "threshold": 0.65
+    },
+    "vs_menu": {
+      "path": "templates/vs/vs_menu.png",
+      "threshold": 0.65
+    },
+    "points_ranking": {
+      "path": "templates/vs/points_ranking.png",
+      "threshold": 0.65
+    },
+    "weekly_rank": {
+      "path": "templates/vs/weekly_rank.png",
+      "threshold": 0.65
+    }
+  },
+  "discord": {
+    "bot_name": "Tina\ubd07",
+
+
+    "dig_notification": {
+      "content": "<:digEmote:1305924160949846106> **NEW DIG / \uc0c8\ub85c\uc6b4 \ubc1c\uad74**",
+      "embed_title": ":zap: Action Required / \uc870\uce58 \ud544\uc694",
+      "embed_value": ":flag_us: A new dig has been posted! Get digging!\n:flag_kr: \uc0c8\ub85c\uc6b4 \ubc1c\uad74\uc774 \uac8c\uc2dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4! \ubc1c\uad74\uc744 \uc2dc\uc791\ud558\uc138\uc694!",
+      "embed_color": "0xFF0000"
+    }
+  }
+}

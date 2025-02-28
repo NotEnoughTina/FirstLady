@@ -207,6 +207,25 @@ The following routines are available for automation:
    * Scheduled event for weekly resets
    * Runs every Sunday at 01:50
    * Handles weekly maintenance tasks
+9. **Weekly Recording** (`weekly_recording`)
+   * Scheduled event for weekly video recording
+   * Runs every Saturday at 9:55 PM Eastern Time
+   * Records game activity for 5 minutes
+
+### Time Zone Configuration
+
+All scheduled events in `automation.json` use UTC time internally. Here's how to convert common time zones:
+
+* Eastern Time (ET) to UTC: Add 4 hours during EDT (March-November) or 5 hours during EST (November-March)
+* Pacific Time (PT) to UTC: Add 7 hours during PDT or 8 hours during PST
+* Central European Time (CET) to UTC: Subtract 1 hour during winter or 2 hours during summer
+
+Examples:
+* 9:55 PM ET = 01:55 UTC (next day)
+* 8:00 AM PT = 15:00 UTC
+* 2:00 PM CET = 13:00 UTC (winter) or 12:00 UTC (summer)
+
+When configuring scheduled events in `automation.json`, always use UTC time format.
 
 ### Managing Routines
 

@@ -14,27 +14,15 @@
       "x": "5%",
       "y": "3%"
     },
-    "secretary_menu": {
-      "x": "70%",
-      "y": "65%"
-    },
-    "list": {
-      "x": "50%",
-      "y": "30%"
-    },
-    "accept": {
-      "x": "50%",
-      "y": "40%"
-    },
-    "back": {
-      "x": "50%",
-      "y": "90%"
-    },
     "swipe": {
       "start_x": "50%",
       "start_y": "30%",
       "end_x": "50%",
       "end_y": "80%"
+    },
+    "alliance_toggle": {
+      "x": "93%",
+      "y": "93%"
     }
   },
   "timings": {
@@ -42,6 +30,7 @@
     "menu_animation": 1,
     "list_animation": 1,
     "swipe_duration": {
+
       "min": 300,
       "max": 400
     },
@@ -83,19 +72,6 @@
   "control_list": {
     "whitelist": {
       "alliance": [
-        "Brn",
-        "sTAR",
-        "twr",
-        "UbRg",
-        "Trol",
-        "trol",
-        "wxp",
-        "NzC",
-        "krw",
-        "FZL",
-        "rhw",
-        "s8UP",
-        "ssUP"
       ]
     },
     "blacklist": {
@@ -242,10 +218,24 @@
     "alliance_gift_premium": {
       "path": "templates/alliance/premium.png",
       "threshold": 0.65
+    },
+    "vs_menu": {
+      "path": "templates/vs/vs_menu.png",
+      "threshold": 0.65
+    },
+    "points_ranking": {
+      "path": "templates/vs/points_ranking.png",
+      "threshold": 0.65
+    },
+    "weekly_rank": {
+      "path": "templates/vs/weekly_rank.png",
+      "threshold": 0.65
     }
   },
   "discord": {
     "bot_name": "Tina\ubd07",
+
+
     "dig_notification": {
       "content": "<:digEmote:1305924160949846106> **NEW DIG / \uc0c8\ub85c\uc6b4 \ubc1c\uad74**",
       "embed_title": ":zap: Action Required / \uc870\uce58 \ud544\uc694",

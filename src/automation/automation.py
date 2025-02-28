@@ -14,6 +14,9 @@ from src.automation.handler_factory import HandlerFactory
 from src.game.controls import launch_game, navigate_home
 import os
 import asyncio
+from adb_shell.adb_device import AdbDeviceTcp, AdbDeviceUsb
+from adb_shell.auth.sign_pythonrsa import PythonRSASigner
+import subprocess
 
 class MainAutomation:
     def __init__(self, device_id: str, debug: bool = False):
@@ -23,12 +26,49 @@ class MainAutomation:
             device_id: Device identifier
             debug: Enable debug logging if True
         """
-        setup_logging(debug=debug)  # Set logging level based on debug flag
+        setup_logging(debug=debug)
         self.device_id = device_id
         app_logger.info(f"Initializing automation for device: {device_id}")
         if debug:
             app_logger.info("Debug mode enabled")
         self.state = AutomationState()
+        
+        # Initialize ADB device
+        try:
+            # Check if device is available
+            result = subprocess.run(['adb', 'devices'], capture_output=True, text=True)
+            if self.device_id not in result.stdout:
+                raise Exception(f"Device {device_id} not found in adb devices list")
+
+            if 'emulator' in device_id:
+                # For emulators, create a shell wrapper
+                self.device = EmulatorShellWrapper(device_id)
+            else:
+                # For physical devices or TCP, use ADB shell library
+                if ':' in device_id:  # TCP connection
+                    host, port = device_id.split(':')
+                    self.device = AdbDeviceTcp(host=host, port=int(port))
+                else:  # USB connection
+                    self.device = AdbDeviceUsb(self.device_id)
+                
+                # Load ADB keys for non-emulator devices
+                adbkey = os.path.expanduser('~/.android/adbkey')
+                if os.path.exists(adbkey):
+                    with open(adbkey) as f:
+                        priv = f.read()
+                    with open(adbkey + '.pub') as f:
+                        pub = f.read()
+                    signer = PythonRSASigner(pub, priv)
+                    self.device.connect(rsa_keys=[signer], auth_timeout_s=5)
+                else:
+                    self.device.connect(auth_timeout_s=5)
+                
+            app_logger.info(f"Connected to device: {device_id}")
+            
+        except Exception as e:
+            app_logger.error(f"Failed to connect to device {device_id}: {e}")
+            raise
+
         config = self.load_automation_config()
         self.time_checks = self.initialize_time_checks(config.get('time_checks', {}))
         self.scheduled_events = self.initialize_scheduled_events(config.get('scheduled_events', {}))
@@ -348,3 +388,22 @@ class MainAutomation:
         """Force a game reset regardless of state"""
         app_logger.info("Forcing game reset...")
         return self.reset_game()
+
+class EmulatorShellWrapper:
+    """Wrapper class to provide shell interface for emulators"""
+    def __init__(self, device_id: str):
+        self.device_id = device_id
+        
+    def shell(self, cmd: str) -> str:
+        """Execute shell command on emulator"""
+        try:
+            result = subprocess.run(
+                ['adb', '-s', self.device_id, 'shell', cmd],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            return result.stdout
+        except subprocess.CalledProcessError as e:
+            app_logger.error(f"Error executing command {cmd}: {e}")
+            raise

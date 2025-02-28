@@ -1,0 +1,45 @@
+{
+    "time_checks": {
+      "cleanup": {
+        "handler": "src.automation.routines.cleanup.CleanupRoutine",
+        "interval": 3600
+      },
+      "donate": {
+        "handler": "src.automation.routines.allianceDonate.AllianceDonateRoutine",
+        "interval": 22000
+      },
+      "help": {
+        "handler": "src.automation.routines.help.HelpRoutine",
+        "interval": 5
+      },
+      "dig": {
+        "handler": "src.automation.routines.checkForDigs.CheckForDigsRoutine",
+        "interval": 5
+      },
+      "secretary": {
+        "handler": "src.automation.routines.secretary.SecretaryRoutine",
+        "interval": 40
+      },
+      "mapExchange": {
+        "handler": "src.automation.routines.mapExchange.MapExchangeRoutine",
+        "interval": 300
+      },
+      "gifts": {
+        "handler": "src.automation.routines.allianceGifts.AllianceGiftsRoutine",
+        "interval": 5000
+      },
+      "collect_resources": {
+        "handler": "src.automation.routines.collectResources.CollectResourcesRoutine",
+        "interval": 10000
+      }
+    },
+    "scheduled_events": {
+      "weekly_reset": {
+        "handler": "src.automation.routines.weeklyVsCapture.WeeklyVsCaptureRoutine",
+        "schedule": {
+          "day": "saturday",
+          "time": "01:55"
+        }
+      }
+    }
+  } 

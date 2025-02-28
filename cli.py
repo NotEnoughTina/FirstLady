@@ -18,13 +18,22 @@ def get_routine_config():
     try:
         with open("config/automation.json") as f:
             config = json.load(f)
-            # Filter out routines with null intervals
+            # Get both time checks and scheduled events
+            routines = {}
+            
+            # Add time checks
             time_checks = {
                 name: data 
                 for name, data in config.get("time_checks", {}).items()
                 if data.get("interval") is not None
             }
-            return time_checks
+            routines.update(time_checks)
+            
+            # Add scheduled events
+            scheduled_events = config.get("scheduled_events", {})
+            routines.update(scheduled_events)
+            
+            return routines
     except Exception:
         return {}
 
@@ -49,7 +58,12 @@ def signal_handler(signum, frame):
 def run_single_routine(device_id: str, routine_name: str) -> bool:
     """Run a single routine"""
     try:
-        routine_config = get_routine_config().get(routine_name)
+        with open("config/automation.json") as f:
+            config = json.load(f)
+            
+        # Check in both time_checks and scheduled_events
+        routine_config = config.get("time_checks", {}).get(routine_name) or config.get("scheduled_events", {}).get(routine_name)
+        
         if not routine_config:
             app_logger.error(f"Routine {routine_name} not found in config")
             return False
@@ -58,11 +72,16 @@ def run_single_routine(device_id: str, routine_name: str) -> bool:
         automation = MainAutomation(device_id, debug=True)
         
         handler_factory = HandlerFactory()
+        handler_args = {
+            "interval": routine_config.get("interval"),
+            "schedule": routine_config.get("schedule")
+        }
+        
         handler = handler_factory.create_handler(
             routine_config["handler"],
             device_id,
-            {"interval": routine_config["interval"]},
-            automation=automation  # Pass the automation instance
+            handler_args,
+            automation=automation
         )
         
         if handler:

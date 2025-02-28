@@ -166,8 +166,8 @@ class SecretaryRoutine(TimeCheckRoutine):
             accept_locations = self.find_accept_buttons()
             if accept_locations:
                 # Scroll to top if needed
-                if len(accept_locations) > 5:
-                    handle_swipes(self.device_id, direction="up")
+                if len(accept_locations) > 2:
+                    handle_swipes(self.device_id, direction="up", num_swipes=10)
                     human_delay(CONFIG['timings']['settle_time'] * 2)
                     accept_locations = self.find_accept_buttons()
                 
@@ -187,23 +187,24 @@ class SecretaryRoutine(TimeCheckRoutine):
                         break
                     
                     topmost_accept = accept_locations[0]
-                    alliance_region, name_region, screenshot = get_text_regions(
-                        topmost_accept, 
-                        self.device_id,
-                        existing_screenshot=current_screenshot
-                    )
-                    
-                    if screenshot is None:
-                        continue
-
-                    alliance_text, original_text = extract_text_from_region(
-                        self.device_id, 
-                        alliance_region, 
-                        languages='eng', 
-                        img=screenshot
-                    )
                     
                     if len(CONTROL_LIST['whitelist']['alliance']) > 0:
+                        alliance_region, name_region, screenshot = get_text_regions(
+                            topmost_accept, 
+                            self.device_id,
+                            existing_screenshot=current_screenshot
+                        )
+                        
+                        if screenshot is None:
+                            continue
+
+                        alliance_text, original_text = extract_text_from_region(
+                            self.device_id, 
+                            alliance_region, 
+                            languages='eng', 
+                            img=screenshot
+                        )
+
                         if alliance_text in CONTROL_LIST['whitelist']['alliance']:
                             humanized_tap(self.device_id, topmost_accept[0], topmost_accept[1])
                             app_logger.debug(f"Tapping accept at coordinates: ({topmost_accept[0]}, {topmost_accept[1]})")
@@ -245,13 +246,9 @@ class SecretaryRoutine(TimeCheckRoutine):
                                     continue
                     else:
                         # No whitelist - accept all
-                        if not find_and_tap_template(
-                            self.device_id,
-                            "accept",
-                            error_msg=f"Failed to accept candidate for {name}",
-                            success_msg=f"Accepting candidate for {name}"
-                        ):
-                            continue
+                        humanized_tap(self.device_id, topmost_accept[0], topmost_accept[1])
+                        app_logger.info(f"Accepted candidate for {name}")
+                        continue
                     
                     processed += 1
                     human_delay(CONFIG['timings']['settle_time'])
