@@ -30,7 +30,6 @@
     "menu_animation": 1,
     "list_animation": 1,
     "swipe_duration": {
-
       "min": 300,
       "max": 400
     },
@@ -72,6 +71,16 @@
   "control_list": {
     "whitelist": {
       "alliance": [
+        "Wlw",
+        "Kl3",
+        "SMa",
+        "WbF",
+        "g54",
+        "tSz",
+        "TDN",
+        "Mttn",
+        "S9v",
+        "BRA3"
       ]
     },
     "blacklist": {
@@ -234,8 +243,6 @@
   },
   "discord": {
     "bot_name": "Tina\ubd07",
-
-
     "dig_notification": {
       "content": "<:digEmote:1305924160949846106> **NEW DIG / \uc0c8\ub85c\uc6b4 \ubc1c\uad74**",
       "embed_title": ":zap: Action Required / \uc870\uce58 \ud544\uc694",

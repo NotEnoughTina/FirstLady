@@ -319,7 +319,8 @@ class SecretaryRoutine(TimeCheckRoutine):
 
     def process_all_secretary_positions(self) -> bool:
         """Process all secretary positions that have applicants"""
-        positions_to_process = self.find_positions_with_applicants()
+        #positions_to_process = self.find_positions_with_applicants()
+        positions_to_process = self.secretary_types
         
         if not positions_to_process:
             app_logger.info("No positions with applicants found")\

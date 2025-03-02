@@ -110,14 +110,29 @@ def swipe_screen(device_id: str, start_x: int, start_y: int, end_x: int, end_y: 
         return False
 
 def get_connected_device() -> Optional[str]:
-    """Get the first connected device ID"""
+    """Get the selected connected device ID"""
     devices = get_device_list()
     if not devices:
         app_logger.error("No devices connected")
         return None
-    if len(devices) > 1:
-        app_logger.warning(f"Multiple devices found, using first one: {devices[0]}")
-    return devices[0]
+    
+    if len(devices) == 1:
+        return devices[0]
+    
+    print("Multiple devices found. Please select one:")
+    for i, device in enumerate(devices, start=1):
+        print(f"{i}. {device}")
+    
+    while True:
+        try:
+            selection = int(input("Enter the number of the device: "))
+            if 1 <= selection <= len(devices):
+                return devices[selection - 1]
+            else:
+                print("Invalid selection. Please enter a number from the list.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
 
 def get_current_running_app(device_id):
     """
