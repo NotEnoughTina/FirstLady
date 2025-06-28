@@ -1,7 +1,7 @@
 """Device interaction utilities"""
 
 import subprocess
-from typing import Optional, Tuple
+from typing import Tuple
 from .logging import app_logger
 from pathlib import Path
 import shutil
@@ -11,22 +11,23 @@ def take_screenshot(device_id: str) -> bool:
     """Take screenshot and pull to local tmp directory"""
     try:
         ensure_dir("tmp")
-        
-        # Take screenshot on device
-        cmd = f"{CONFIG.adb['binary_path']} -s {device_id} shell screencap -p /sdcard/screen.png"
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0:
-            app_logger.error(f"Failed to take screenshot: {result.stderr}")
-            return False
-            
-        # Pull screenshot to local tmp directory
-        cmd = f"{CONFIG.adb['binary_path']} -s {device_id} pull /sdcard/screen.png tmp/screen.png"
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0:
-            app_logger.error(f"Failed to pull screenshot: {result.stderr}")
-            return False
-            
-        # Clean up device screenshots
+
+        # pipe = subprocess.Popen(f"{CONFIG.adb["binary_path"]} exec-out screencap -p",
+        #                         stdin=subprocess.PIPE,
+        #                         stdout=subprocess.PIPE, shell=True)
+        # image_bytes = pipe.stdout.read()  # .replace(b'\r\n', b'\n')
+        # image = cv2.imdecode(np.fromstring(image_bytes, np.uint8), cv2.IMREAD_COLOR)
+        #
+        # cv2.imwrite("tmp/screen.png", image)
+
+        cmd = [CONFIG.adb["binary_path"], "exec-out", "screencap", "-p"]
+        with open('tmp/screen.png', "w") as outfile:
+            result = subprocess.run(cmd, stdout=outfile)
+            if result.returncode != 0:
+                app_logger.error(f"Failed to pull screenshot: {result.stderr}")
+                return False
+
+        # Clean up device screenshot
         cleanup_device_screenshots(device_id)
         return True
         
